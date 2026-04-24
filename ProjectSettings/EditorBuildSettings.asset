@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MENU.unity
+    guid: 9d6179602b254e04ba423d4839a0716e
+  - enabled: 1
+    path: Assets/Scenes/MAPA1.unity
+    guid: 71be506051a38774295cc375b0343851
+  - enabled: 1
+    path: Assets/Scenes/MAPA2.unity
+    guid: 278e9b2134cd0fb4f92f3ccefa0fad2f
+  - enabled: 1
+    path: Assets/Scenes/MAPAPRIN.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/MAPAPRIN(PISTA2).unity
+    guid: fc3c0378b8b5ead4b9d9e0d0d2763faf
+  m_configObjects: {}
