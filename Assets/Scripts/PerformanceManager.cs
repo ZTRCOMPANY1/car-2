@@ -2,22 +2,24 @@ using UnityEngine;
 
 public class PerformanceManager : MonoBehaviour
 {
-    public FPSDisplay fpsDisplay;
-    public PerformancePro performancePro;
+    FPSDisplay fpsDisplay;
+    PerformancePro performancePro;
 
     public bool mostrar = true;
+    int modo = 0;
 
-    int modo = 0; // 0 = simples | 1 = pro
+    void Start()
+    {
+        // Procura automaticamente na cena
+        fpsDisplay = FindObjectOfType<FPSDisplay>();
+        performancePro = FindObjectOfType<PerformancePro>();
+    }
 
     void Update()
     {
-        // Mostrar / esconder
         if (Input.GetKeyDown(KeyCode.F3))
-        {
             mostrar = !mostrar;
-        }
 
-        // Alternar modo
         if (Input.GetKeyDown(KeyCode.F2))
         {
             modo++;
@@ -35,9 +37,10 @@ public class PerformanceManager : MonoBehaviour
 
         string texto = "";
 
-        if (modo == 0)
+        if (modo == 0 && fpsDisplay != null)
             texto = fpsDisplay.GetFPS();
-        else
+
+        if (modo == 1 && performancePro != null)
             texto = performancePro.GetInfo();
 
         GUI.Label(new Rect(10, 10, 600, 300), texto, style);
