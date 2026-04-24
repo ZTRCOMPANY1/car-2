@@ -26,11 +26,11 @@ public class PerformanceUI : MonoBehaviour
     void Update()
     {
         // Toggle UI
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.F6))
             mostrar = !mostrar;
 
         // Modo Dev / Player
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.F5))
             modoDev = !modoDev;
 
         painel.SetActive(mostrar);
