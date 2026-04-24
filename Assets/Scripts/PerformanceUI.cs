@@ -9,7 +9,7 @@ public class PerformanceUI : MonoBehaviour
     public GameObject painel;
     public TextMeshProUGUI texto;
 
-    [Header("Gráficos")]
+    [Header("Graficos")]
     public RectTransform graficoFPS;
     public RectTransform graficoRAM;
     public GameObject pontoPrefab;
@@ -25,15 +25,16 @@ public class PerformanceUI : MonoBehaviour
 
     void Update()
     {
-        // Toggle UI
-        if (Input.GetKeyDown(KeyCode.F6))
-            mostrar = !mostrar;
-
-        // Modo Dev / Player
+        // F3 SEMPRE FUNCIONA AGORA
         if (Input.GetKeyDown(KeyCode.F5))
-            modoDev = !modoDev;
+        {
+            mostrar = !mostrar;
+            painel.SetActive(mostrar);
+        }
 
-        painel.SetActive(mostrar);
+        // Alterna modo
+        if (Input.GetKeyDown(KeyCode.F6))
+            modoDev = !modoDev;
 
         if (!mostrar) return;
 
@@ -44,17 +45,22 @@ public class PerformanceUI : MonoBehaviour
         // RAM
         long memoria = GC.GetTotalMemory(false) / (1024 * 1024);
 
-        // Cor dinâmica FPS
+        // VRAM (estimativa)
+        int vramTotal = SystemInfo.graphicsMemorySize; // MB
+        int vramUso = (int)(UnityEngine.Profiling.Profiler.GetTotalAllocatedMemoryLong() / (1024 * 1024));
+
+        // Cor dinâmica
         Color corFPS = Color.green;
         if (fps < 50) corFPS = Color.yellow;
         if (fps < 30) corFPS = Color.red;
 
-        // Texto
+        // TEXTO
         if (modoDev)
         {
             texto.text =
                 $"<color=#{ColorUtility.ToHtmlStringRGB(corFPS)}>FPS: {fps:0}</color>\n" +
                 $"RAM: {memoria} MB\n" +
+                $"VRAM: {vramUso} / {vramTotal} MB\n" +
                 $"CPU: {SystemInfo.processorType}\n" +
                 $"GPU: {SystemInfo.graphicsDeviceName}";
         }
