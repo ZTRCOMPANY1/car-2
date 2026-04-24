@@ -2,18 +2,19 @@ using UnityEngine;
 
 public class CursorToggle : MonoBehaviour
 {
-    private bool cursorVisivel = false;
+    // Começa com cursor visível
+    private bool cursorVisivel = true;
 
     void Start()
     {
-        // Começa com cursor escondido e travado no centro
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor aparece já no início
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     void Update()
     {
-        // Quando apertar ALT
+        // Detecta ALT esquerdo ou direito
         if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt))
         {
             cursorVisivel = !cursorVisivel;
