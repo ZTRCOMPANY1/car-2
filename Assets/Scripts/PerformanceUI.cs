@@ -22,9 +22,8 @@ public class PerformanceUI : MonoBehaviour
     int maxPontos = 50;
 
     bool mostrar = true;
-    bool modoDev = true;
 
-    // CPU
+    // CPU %
     Process processo;
     float ultimoTempoCPU;
     float ultimoTempo;
@@ -39,16 +38,12 @@ public class PerformanceUI : MonoBehaviour
 
     void Update()
     {
-        // F3 (mostrar/esconder) - AGORA FUNCIONA
-        if (Input.GetKeyDown(KeyCode.F5))
+        // Toggle UI (F3)
+        if (Input.GetKeyDown(KeyCode.F3))
         {
             mostrar = !mostrar;
             painel.SetActive(mostrar);
         }
-
-        // F1 (modo dev/player)
-        if (Input.GetKeyDown(KeyCode.F6))
-            modoDev = !modoDev;
 
         if (!mostrar) return;
 
@@ -56,7 +51,7 @@ public class PerformanceUI : MonoBehaviour
         deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
 
-        // RAM
+        // RAM (uso do jogo)
         long memoria = GC.GetTotalMemory(false) / (1024 * 1024);
 
         // VRAM (estimativa)
@@ -75,26 +70,23 @@ public class PerformanceUI : MonoBehaviour
         ultimoTempoCPU = tempoCPUAtual;
         ultimoTempo = tempoAtual;
 
+        // GPU % (estimado baseado em FPS)
+        float gpuUso = Mathf.Clamp(100f - cpuUso, 0f, 100f);
+
         // Cor dinâmica FPS
         Color corFPS = Color.green;
         if (fps < 50) corFPS = Color.yellow;
         if (fps < 30) corFPS = Color.red;
 
-        // TEXTO
-        if (modoDev)
-        {
-            texto.text =
-                $"<color=#{ColorUtility.ToHtmlStringRGB(corFPS)}>FPS: {fps:0}</color>\n" +
-                $"CPU: {cpuUso:0}%\n" +
-                $"RAM: {memoria} MB\n" +
-                $"VRAM: {vramUso} / {vramTotal} MB\n" +
-                $"GPU: {SystemInfo.graphicsDeviceName}";
-        }
-        else
-        {
-            texto.text =
-                $"<color=#{ColorUtility.ToHtmlStringRGB(corFPS)}>FPS: {fps:0}</color>";
-        }
+        // TEXTO FINAL
+        texto.text =
+            $"<color=#{ColorUtility.ToHtmlStringRGB(corFPS)}>FPS: {fps:0}</color>\n" +
+            $"CPU: {cpuUso:0}%\n" +
+            $"GPU: {gpuUso:0}% (estimado)\n" +
+            $"RAM: {memoria} MB\n" +
+            $"VRAM: {vramUso} / {vramTotal} MB\n" +
+            $"CPU: {SystemInfo.processorType}\n" +
+            $"GPU: {SystemInfo.graphicsDeviceName}";
 
         AtualizarGrafico(fps, pontosFPS, graficoFPS, 120);
         AtualizarGrafico(memoria, pontosRAM, graficoRAM, 8000);
