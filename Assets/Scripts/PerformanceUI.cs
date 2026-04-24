@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using System;
+using System.Diagnostics;
 
 public class PerformanceUI : MonoBehaviour
 {
@@ -23,16 +24,29 @@ public class PerformanceUI : MonoBehaviour
     bool mostrar = true;
     bool modoDev = true;
 
+    // CPU
+    Process processo;
+    float ultimoTempoCPU;
+    float ultimoTempo;
+    float cpuUso;
+
+    void Start()
+    {
+        processo = Process.GetCurrentProcess();
+        ultimoTempoCPU = (float)processo.TotalProcessorTime.TotalMilliseconds;
+        ultimoTempo = Time.realtimeSinceStartup;
+    }
+
     void Update()
     {
-        // F3 SEMPRE FUNCIONA AGORA
+        // F3 (mostrar/esconder) - AGORA FUNCIONA
         if (Input.GetKeyDown(KeyCode.F5))
         {
             mostrar = !mostrar;
             painel.SetActive(mostrar);
         }
 
-        // Alterna modo
+        // F1 (modo dev/player)
         if (Input.GetKeyDown(KeyCode.F6))
             modoDev = !modoDev;
 
@@ -46,10 +60,22 @@ public class PerformanceUI : MonoBehaviour
         long memoria = GC.GetTotalMemory(false) / (1024 * 1024);
 
         // VRAM (estimativa)
-        int vramTotal = SystemInfo.graphicsMemorySize; // MB
+        int vramTotal = SystemInfo.graphicsMemorySize;
         int vramUso = (int)(UnityEngine.Profiling.Profiler.GetTotalAllocatedMemoryLong() / (1024 * 1024));
 
-        // Cor dinâmica
+        // CPU %
+        float tempoAtual = Time.realtimeSinceStartup;
+        float tempoCPUAtual = (float)processo.TotalProcessorTime.TotalMilliseconds;
+
+        float deltaCPU = tempoCPUAtual - ultimoTempoCPU;
+        float deltaTempo = (tempoAtual - ultimoTempo) * 1000f;
+
+        cpuUso = (deltaCPU / (deltaTempo * SystemInfo.processorCount)) * 100f;
+
+        ultimoTempoCPU = tempoCPUAtual;
+        ultimoTempo = tempoAtual;
+
+        // Cor dinâmica FPS
         Color corFPS = Color.green;
         if (fps < 50) corFPS = Color.yellow;
         if (fps < 30) corFPS = Color.red;
@@ -59,9 +85,9 @@ public class PerformanceUI : MonoBehaviour
         {
             texto.text =
                 $"<color=#{ColorUtility.ToHtmlStringRGB(corFPS)}>FPS: {fps:0}</color>\n" +
+                $"CPU: {cpuUso:0}%\n" +
                 $"RAM: {memoria} MB\n" +
                 $"VRAM: {vramUso} / {vramTotal} MB\n" +
-                $"CPU: {SystemInfo.processorType}\n" +
                 $"GPU: {SystemInfo.graphicsDeviceName}";
         }
         else
