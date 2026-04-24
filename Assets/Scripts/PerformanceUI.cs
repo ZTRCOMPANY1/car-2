@@ -39,7 +39,7 @@ public class PerformanceUI : MonoBehaviour
     void Update()
     {
         // Toggle UI (F3)
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.F4))
         {
             mostrar = !mostrar;
             painel.SetActive(mostrar);
