@@ -7987,6 +7987,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590922075}
   m_Mesh: {fileID: -1759499533395470362, guid: 4764f71eddbb8fe4c8ebb0aa56af0952, type: 3}
+--- !u!1 &591100161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591100163}
+  - component: {fileID: 591100162}
+  m_Layer: 0
+  m_Name: FPSCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &591100162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591100161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2dbd0836d818d147b35d1d3efc08c81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mostrarFPS: 0
+--- !u!4 &591100163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591100161}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 425.99997, y: 206.23611, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &601827968
 GameObject:
   m_ObjectHideFlags: 0
@@ -8922,7 +8967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b09f7272dbc8a4785f513d228c6555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teclaPrint: 292
+  teclaPrint: 293
 --- !u!4 &651386627
 Transform:
   m_ObjectHideFlags: 0
@@ -12045,6 +12090,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ed5b9c948686a49a0e6b2af517c82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &847990517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 847990519}
+  - component: {fileID: 847990518}
+  m_Layer: 0
+  m_Name: PerformanceMonitor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &847990518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847990517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62aafd862d515d5409122569560ac204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mostrar: 0
+--- !u!4 &847990519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847990517}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 70.32501, y: 399.9894, z: -62.51667}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &850972905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23563,7 +23653,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1819586921}
-  - component: {fileID: 1819586920}
   - component: {fileID: 1819586919}
   m_Layer: 0
   m_Name: CameraManager
@@ -23586,20 +23675,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraAlvo: {fileID: 1273270113}
   tecla: 283
---- !u!114 &1819586920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819586918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886f82634923d214b9a9d271c54191fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraAlvo: {fileID: 1273270113}
-  tecla: 99
 --- !u!4 &1819586921
 Transform:
   m_ObjectHideFlags: 0
@@ -27006,6 +27081,8 @@ SceneRoots:
   - {fileID: 1683685763}
   - {fileID: 1819586921}
   - {fileID: 651386627}
+  - {fileID: 591100163}
+  - {fileID: 847990519}
   - {fileID: 1273270117}
   - {fileID: 632118314}
   - {fileID: 1182103241}
