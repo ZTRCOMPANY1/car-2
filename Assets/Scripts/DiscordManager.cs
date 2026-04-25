@@ -7,7 +7,7 @@ public class DiscordManager : MonoBehaviour
     public static DiscordManager Instance;
 
     [Header("Discord App ID")]
-    [SerializeField] private long applicationId = COLOQUE_SEU_ID;
+    [SerializeField] private long applicationId = 1497385328728870932;
 
     private Discord discord;
 
