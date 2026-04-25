@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.discord.partnersdk": "file:C:/Users/gmdes/Downloads/DiscordSocialSdk-UnityPlugin-1.9.15332/com.discord.partnersdk",
     "com.unity.collab-proxy": "2.12.4",
     "com.unity.formats.fbx": "4.2.1",
     "com.unity.ide.rider": "3.0.36",
