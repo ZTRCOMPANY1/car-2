@@ -4,7 +4,7 @@ using Discord.SDK;
 public class DiscordManager : MonoBehaviour
 {
     [Header("Discord App ID")]
-    [SerializeField] private long applicationId = COLOQUE_SEU_ID;
+    [SerializeField] private long applicationId = 1497385328728870932;
 
     private Discord discord;
 
