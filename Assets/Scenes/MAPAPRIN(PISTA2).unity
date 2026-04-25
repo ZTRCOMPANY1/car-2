@@ -21208,7 +21208,7 @@ GameObject:
   - component: {fileID: 1582455695}
   - component: {fileID: 1582455694}
   m_Layer: 0
-  m_Name: DiscordManager
+  m_Name: DiscordManage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
