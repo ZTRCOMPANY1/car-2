@@ -1,19 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Discord.SDK;
+using Discord.Sdk;
 
 public class DiscordManager : MonoBehaviour
 {
     public static DiscordManager Instance;
 
-    [Header("Discord App ID")]
-    [SerializeField] private long applicationId = 1497385328728870932;
+    [Header("Discord Application ID")]
+    [SerializeField] private ulong applicationId = 1497385328728870932;
 
-    private Discord discord;
+    private Client client;
 
     void Awake()
     {
-        // Singleton
         if (Instance == null)
         {
             Instance = this;
@@ -25,38 +24,30 @@ public class DiscordManager : MonoBehaviour
             return;
         }
 
-        // Inicia Discord
         try
         {
-            discord = new Discord(applicationId);
+            client = new Client();
             Debug.Log("Discord conectado!");
         }
         catch (System.Exception e)
         {
-            Debug.LogError("Erro Discord: " + e.Message);
+            Debug.LogError("Erro ao conectar Discord: " + e.Message);
         }
 
-        // Escuta mudança de cena
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void Start()
     {
-        UpdateDiscordByScene(SceneManager.GetActiveScene().name);
-    }
-
-    void Update()
-    {
-        if (discord != null)
-            discord.RunCallbacks();
+        UpdateDiscord(SceneManager.GetActiveScene().name);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        UpdateDiscordByScene(scene.name);
+        UpdateDiscord(scene.name);
     }
 
-    void UpdateDiscordByScene(string sceneName)
+    void UpdateDiscord(string sceneName)
     {
         switch (sceneName)
         {
@@ -81,27 +72,28 @@ public class DiscordManager : MonoBehaviour
                 break;
 
             default:
-                SetPresence("Jogando", "Explorando o jogo", "logo");
+                SetPresence("Jogando", "Explorando", "logo");
                 break;
         }
     }
 
     void SetPresence(string state, string details, string image)
     {
-        if (discord == null) return;
+        if (client == null) return;
 
-        var activity = new Activity()
-        {
-            Name = "Race Low Poly",
-            State = state,
-            Details = details,
-            Type = ActivityType.Playing
-        };
+        Activity activity = new Activity();
+        activity.SetName("Race Low Poly");
+        activity.SetType(ActivityTypes.Playing);
+        activity.SetState(state);
+        activity.SetDetails(details);
 
-        activity.Assets.LargeImage = image;
-        activity.Assets.LargeText = "Race Low Poly";
+        ActivityAssets assets = new ActivityAssets();
+        assets.SetLargeImage(image);
+        assets.SetLargeText("Race Low Poly");
 
-        discord.GetActivityManager().UpdateActivity(activity, result =>
+        activity.SetAssets(assets);
+
+        client.UpdateRichPresence(activity, result =>
         {
             Debug.Log("Discord atualizado: " + details);
         });
@@ -109,12 +101,12 @@ public class DiscordManager : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        if (discord != null)
-        {
-            discord.Dispose();
-            discord = null;
-        }
-
         SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        if (client != null)
+        {
+            client.Dispose();
+            client = null;
+        }
     }
 }
