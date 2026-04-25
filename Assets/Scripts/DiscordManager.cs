@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DiscordManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] string applicationId = "1497385328728870932";
+
     void Start()
     {
-        
+        Debug.Log("Discord iniciado!");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetMenu()
     {
-        
+        Debug.Log("Status: Menu Principal");
+    }
+
+    public void SetRace()
+    {
+        Debug.Log("Status: Correndo");
     }
 }
